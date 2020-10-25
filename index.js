@@ -26,7 +26,7 @@ function getApi(url, base, index) {
     }).then((response) => {
         response.text().then(function (data) {
             if (data != 0) {
-                const check = spawn("nc", ["-z", "-v", data, "80"])
+                const check = spawn("timeout", ["1", "nc", "-z", "-v", data, "80"])
                 check.stdout.on('data', (data) => {
                     var kuy = `${(base + index)}: http://${data}`;
                     log.info(kuy)
