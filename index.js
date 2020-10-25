@@ -2,6 +2,7 @@ const fetch = require('node-fetch')
 var FormData = require('form-data');
 const { delay } = require('lodash');
 const log = require('simple-node-logger').createSimpleLogger('project.log');
+const { spawn } = require("child_process");
 // let ip = 131174112652
 
 let base = 131174112400
@@ -25,8 +26,16 @@ function getApi(url, base, index) {
     }).then((response) => {
         response.text().then(function (data) {
             if (data != 0) {
-                var kuy = `${(base + index)}: http://${data}`;
-                log.info(kuy)
+                const check = spawn("nc", ["-z", "-v", data, "80"])
+                check.stdout.on('data', (data) => {
+                    var kuy = `${(base + index)}: http://${data}`;
+                    log.info(kuy)
+                    // console.log(`stdout: ${data}`);
+                });
+
+                check.stderr.on('data', (data) => {
+                    // console.error(`stderr: ${data}`);
+                });
             }
         })
         index++
