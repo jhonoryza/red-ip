@@ -2,6 +2,13 @@ const fetch = require('node-fetch')
 var FormData = require('form-data');
 const connectionTester = require('connection-tester');
 const log = require('simple-node-logger').createSimpleLogger('project.log');
+var scrap = require('scrap');
+
+let signature = '6362aaf1b46ef9ccfd4d8dd292deb8a1';
+scrap('https://ip-dynamic.com', function (err, $) {
+    signature = $('#signature')[0].attribs.value || signature
+});
+
 // let ip = 131174112653
 
 let base = 131174112652
@@ -11,14 +18,13 @@ var url = 'https://ip-dynamic.com/home/getUsageOnline'
 getApi(url, base, index)
 
 function getApi(url, base, index) {
-    if (index == 300)
+    if (index == 100)
         return
 
     const indihomeIp = base + index
     const params = new FormData();
     params.append('no_indihome', `${indihomeIp}`);
-    params.append('signature', '6362aaf1b46ef9ccfd4d8dd292deb8a1');
-    //staging 541045b6d5a72528406c021abe4bf06
+    params.append('signature', signature);
     fetch(url, {
         method: 'post',
         body: params

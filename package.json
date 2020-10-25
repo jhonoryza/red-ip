@@ -13,6 +13,7 @@
     "connection-tester": "^0.2.0",
     "form-data": "^3.0.0",
     "node-fetch": "^2.6.1",
+    "scrap": "^0.1.0",
     "simple-node-logger": "^18.12.24"
   }
 }
