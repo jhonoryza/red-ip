@@ -1,0 +1,16 @@
+{
+  "name": "indihome",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodejs index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "form-data": "^3.0.0",
+    "node-fetch": "^2.6.1",
+    "simple-node-logger": "^18.12.24"
+  }
+}
